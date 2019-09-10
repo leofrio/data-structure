@@ -48,7 +48,7 @@ public class Lista {
 		} 
 		length++;
 	}
-	public void get(int pos) {
+	public Element get(int pos) {
 		
 		Element aux = primeiro;
 		
@@ -59,6 +59,6 @@ public class Lista {
 			aux = aux.getProx();
 			i++;
 		} 
-		this.element=aux;
+		return aux;
 	}
 }
