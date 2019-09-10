@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 public class Main {
@@ -33,12 +34,50 @@ public class Main {
 				break;
 			} 
 		}  
-		for(int i=1;i < l1.getLength();i++) { 
-			for(int j=1;j< l2.getLength();j++) {
-				if(exp[i])
+		for(int i=1;i <= l1.getLength();i++) {  
+			int counter=0;
+			for(int j=1;j <= l2.getLength();j++) {
+				if(l1.get(i).getExpoente() == l2.get(j).getExpoente()) {
+					l1.get(i).setCoeficiente(l1.get(i).getCoeficiente() + l2.get(j).getCoeficiente()); 
+					counter++;
+					
+				} 
+			}
+			if(counter ==0) {  
+				l1.get(i).setCoeficiente(l1.get(i).getCoeficiente());
+				l1.get(i).setExpoente(l1.get(i).getExpoente());
 			}
 		}
+		for(int j=1;j <= l2.getLength();j++) {
+			for(int i=1;i <= l1.getLength();i++) {
+				if(l2.get(j).getExpoente() == l1.get(i).getExpoente()) {
+					break;
+				} 
+				if(i == l1.getLength()) {
+					l1.add(l2.get(j).getCoeficiente(), l2.get(j).getExpoente()); 
+					break;
+				}
+			}
+		}
+		for(int i =1;i <= l1.getLength();i++) {  
+			if(l1.get(i).getExpoente() == 0) {  
+				System.out.print(l1.get(i).getCoeficiente());
+			} 
+			else {
+				if(i == l1.getLength()) {
+					System.out.print(l1.get(i).getCoeficiente() + "x^" + l1.get(i).getExpoente() );
+				} 
+				else {
+					if(l1.get(i).getExpoente() == 1) {
+						System.out.print(l1.get(i).getCoeficiente() + "x" + " +");
+					} 
+					else {
+						System.out.print(l1.get(i).getCoeficiente() + "x^" + l1.get(i).getExpoente() + " +");
+					}
+				}
+			}	
+		}
 		
-	}
+	} 
 
 }
