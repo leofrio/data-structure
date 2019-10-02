@@ -2,11 +2,16 @@ package stack;
 
 public class Stack {
     private Element top=null;
-    private boolean error; 
+    private boolean error=false; 
     public boolean getError() {
         return error;
-    } 
-    public Element getTop() {
+    }  
+    
+    public void setError(boolean error) {
+		this.error = error;
+	}
+
+	public Element getTop() {
         return top;
     }
     public void push(char letter) {
@@ -16,7 +21,7 @@ public class Stack {
             top=brand; 
         } 
         if(letter == ')') {
-            error = pop();
+            error = !pop();
         }
     } 
     public boolean pop() {
