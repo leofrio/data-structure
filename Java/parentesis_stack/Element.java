@@ -1,6 +1,4 @@
 
-package stack;
-
 public class Element {
     private char letter;
     private Element next;  
