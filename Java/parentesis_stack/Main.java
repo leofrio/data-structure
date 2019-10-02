@@ -1,20 +1,12 @@
 
-package stack;
-
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Stack s=new Stack();
-        Scanner let= new Scanner(System.in); 
-        for(int j=0;true;j++) {
-            System.out.println("escolha uma das opcoes abaixo");
-            System.out.println("1-digitar uma expressao");
-            System.out.println("2-sair");
-            int choice=let.nextInt();
-            if(choice == 1) {
-                System.out.println("digite a expressao");
-                String word=let.next();
+        Scanner let= new Scanner(System.in);  
+        		System.out.println("digite a expressao");
+                String word=let.nextLine();
                 for(int i=0;i < word.length();i++) {
                     s.push(word.charAt(i));
                     if(s.getError() ==true) { 
@@ -31,12 +23,6 @@ public class Main {
                 } 
                 else {
                     System.out.println("expressao correta pois nao contem erros de parentesis");
-                }
-            }
-            if(choice == 2) {
-                break;
-            }
-        }
-        
-    }
+                } 
+	}
 }
