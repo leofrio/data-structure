@@ -1,5 +1,3 @@
-package arnaldo;
-
 public class Element {
 	private int number;
 	private Element next;
