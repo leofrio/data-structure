@@ -1,5 +1,3 @@
-package arnaldo;
-
 public class List {
 	private Element first; 
 	private Element last; 
