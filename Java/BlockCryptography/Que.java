@@ -19,33 +19,38 @@ public class Que {
 		char lowerbeg='a';
 		char capsbeg='A';
 		int lowerindex=lowerbeg;
-		lowerindex -= 1; 
-		int capsindex=capsbeg;
-		capsindex -= 1; 
+		int capsindex=capsbeg; 
 		//aqui colocamos todas as palavras com acento,para que estas possam ser transformadas em suas respectivas palavras sem acentos
-		String specialletter = "À Á Â Ã Ä Å Æ Ç È É Ê Ë Ì Í Î Ï Ğ Ñ Ò Ó Ô Õ Ö Ø Ù Ú Û Ü İ Ş ß à á â ã ä å æ ç è é ê ë ì í î ï  ğ ñ ò ó ô õ ö ø ù ú û ü ı ş ÿ ";
+		String specialletter = "Ã€ Ã Ã‚ Ãƒ Ã„ Ã… Ã† Ã‡ Ãˆ Ã‰ ÃŠ Ã‹ ÃŒ Ã Ã Ã Ã Ã‘ Ã’ Ã“ Ã” Ã• Ã– Ã˜ Ã™ Ãš Ã› Ãœ Ã Ã ÃŸ Ã  Ã¡ Ã¢ Ã£ Ã¤ Ã¥ Ã¦ Ã§ Ã¨ Ã© Ãª Ã« Ã¬ Ã­ Ã® Ã¯  Ã° Ã± Ã² Ã³ Ã´ Ãµ Ã¶ Ã¸ Ã¹ Ãº Ã» Ã¼ Ã½ Ã¾ Ã¿ ";
 		//aqui reniciamos o block para caso se for adicionado tudo outra vez este nao seja o mesmo
 		block="";
 		this.blocksize=blocksize;
 		this.key=key;  
 		key=deAccent(key);
 		//aqui dizemos o index que vai dizer qual das palavras do block sera a base da criptografacao
-		int index=0;
-		for(int i=0;i < blocksize;i++) { 
-			//aqui cautatectamos a string bloco para que essa seja fisica e constante durante o processo da criptograficacao 
-				block += key.substring(i, i+1);
-		}
+		int index=0; 
+		if(blocksize < key.length()) {
+			for(int i=0;i < blocksize;i++) { 
+				//aqui cautatectamos a string bloco para que essa seja fisica e constante durante o processo da criptograficacao 
+					block += key.substring(i, i+1);
+			} 
+		} 
+		else {
+			//se o bloco  for maior que a palvra simplesmente o bloco e igual a palavra
+			block=key;
+		} 
+		int blockrealsize=block.length();
 		for(int i=0;i< word.length();i++) {
 			//no comeco do loop nos garantimos que o index sempre sera apenas as letras do block que foram definidas no blockindex
 			//por isso dizemos que se o index for igual ao blockindex este voltara a 0 para pegar denovo a primeira letra do block
-			if(index == blocksize) {
+			if(index == blockrealsize) {
 				index=0;
 			}
 			//aqui definimos a letra e o tester e a letra do block que sera a base da criptograficacao
 			char letter=word.charAt(i); 
 			tester=block.charAt(index);
 			//aqui vemos se o o caracter e uma letra que no caso sera criptografado se nao,nao sera
-			if(Character.isLetter(letter)) {
+			if(Character.isLetter(letter) && Character.isLetter(tester)) {
 				for(int j=0; j < specialletter.length();j++) {
 					//aqui vemos se a letra e uma letra com acento
 					if(letter == specialletter.charAt(j)) {
@@ -112,11 +117,9 @@ public class Que {
 			char lowerbeg='a';
 			char capsbeg='A';
 			int lowerindex=lowerbeg;
-			lowerindex -= 1; 
 			int capsindex=capsbeg;
-			capsindex -= 1; 
 			//aqui colocamos todas as palavras com acento,para que estas possam ser transformadas em suas respectivas palavras sem acentos
-			String specialletter = "ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõöøùúûüışÿ";
+			String specialletter = "Ã€ÃÃ‚ÃƒÃ„Ã…Ã†Ã‡ÃˆÃ‰ÃŠÃ‹ÃŒÃÃÃÃÃ‘Ã’Ã“Ã”Ã•Ã–Ã˜Ã™ÃšÃ›ÃœÃÃÃŸÃ Ã¡Ã¢Ã£Ã¤Ã¥Ã¦Ã§Ã¨Ã©ÃªÃ«Ã¬Ã­Ã®Ã¯Ã°Ã±Ã²Ã³Ã´ÃµÃ¶Ã¸Ã¹ÃºÃ»Ã¼Ã½Ã¾Ã¿";
 			//aqui reniciamos o block para caso se for adicionado tudo outra vez este nao seja o mesmo
 			block="";
 			this.blocksize=blocksize;
@@ -124,21 +127,28 @@ public class Que {
 			key=deAccent(key);
 			//aqui dizemos o index que vai dizer qual das palavras do block sera a base da criptografacao
 			int index=0;
-			for(int i=0;i < blocksize;i++) { 
-				//aqui cautatectamos a string bloco para que essa seja fisica e constante durante o processo da criptograficacao
-				block += key.substring(i, i+1);
-			}
+			if(blocksize < key.length()) {
+				for(int i=0;i < blocksize;i++) { 
+					//aqui cautatectamos a string bloco para que essa seja fisica e constante durante o processo da criptograficacao 
+						block += key.substring(i, i+1);
+				} 
+			} 
+			else {
+				//se o bloco  for maior que a palvra simplesmente o bloco e igual a palavra
+				block=key;
+			} 
+			int blockrealsize=block.length();
 			for(int i=0;i< word.length();i++) {
 				//no comeco do loop nos garantimos que o index sempre sera apenas as letras do block que foram definidas no blockindex
 				//por isso dizemos que se o index for igual ao blockindex este voltara a 0 para pegar denovo a primeira letra do block
-				if(index == blocksize) {
+				if(index == blockrealsize) {
 					index=0;
 				}
 				//aqui definimos a letra e o tester e a letra do block que sera a base da criptograficacao
-				char letter=word.charAt(i); 
+				char letter=word.charAt(i);  
 				tester=block.charAt(index); 
 				//aqui vemos se o o caracter e uma letra que no caso sera criptografado se nao,nao sera
-				if(Character.isLetter(letter)) {
+				if(Character.isLetter(letter) && Character.isLetter(tester)) {
 					for(int j=0; j < specialletter.length();j++) {
 						//aqui vemos se a letra e uma letra com acento
 						if(letter == specialletter.charAt(j)) {
@@ -158,7 +168,7 @@ public class Que {
 						int amount=testerasc - lowerindex;
 						ascii -= amount; 
 						//122 e o representante de z na tabela ascii por isso se este passar do A este volta para o z e adiciona a diferenca
-						if(ascii < lowerindex+1) {
+						if(ascii < lowerindex) {
 							ascii= 122 - Math.abs(ascii - lowerindex);
 						}
 						//aqui convertemos o numero em tabela ascii de volta para a char letter
@@ -172,7 +182,7 @@ public class Que {
 						int amount=testerasc - capsindex;
 						ascii -= amount; 
 						//e que o 90 representa o Z na tabela ascii, por isso quando se passa do A este volta para o Z e adiciona a diferenca
-						if(ascii < capsindex+1) {
+						if(ascii < capsindex) {
 							ascii= 90 - Math.abs(ascii - capsindex);
 						}
 						letter=(char)ascii;
@@ -222,10 +232,29 @@ public class Que {
 	public void empty() {
 		first=null; 
 		length=0;
-	} 
+	}  
+	public void debug() {
+        Element aux = first;
+        int cont = 1;
+        System.out.println("|----------- Inicio da conversÃ£o -----------|");
+        while(aux != null) {
+            System.out.println("|---- Inicio do " + cont + "Âº Bloco ----|");
+            for(int i = 0; i < blocksize; i++) {
+                System.out.println("NÃ³ " + cont + ": " +
+                        "\n- Caractere alterado: " + aux.getLetter());
+            }
+            System.out.println("|---- Fim do " + cont + "Âº Bloco ----|");
+            cont++;
+            aux = aux.getNext();
+
+        }
+        System.out.println("|----------- Fim da conversÃ£o -----------|");
+    } 
+	
 	public static String deAccent(String str) {
 		String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD); 
 		Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
 		return pattern.matcher(nfdNormalizedString).replaceAll("");
 	}
 }
+
