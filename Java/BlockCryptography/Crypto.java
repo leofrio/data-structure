@@ -16,7 +16,7 @@ public class Crypto {
 		//para ser jogado para a fila
 		String block="";
 		//aqui colocamos todas as palavras com acento,para que estas possam ser transformadas em suas respectivas palavras sem acentos
-		String specialletter = "À Á Â Ã Ä Å Æ Ç È É Ê Ë Ì Í Î Ï Ğ Ñ Ò Ó Ô Õ Ö Ø Ù Ú Û Ü İ Ş ß à á â ã ä å æ ç è é ê ë ì í î ï  ğ ñ ò ó ô õ ö ø ù ú û ü ı ş ÿ ";
+		String specialletter = "Ã€ Ã Ã‚ Ãƒ Ã„ Ã… Ã† Ã‡ Ãˆ Ã‰ ÃŠ Ã‹ ÃŒ Ã Ã Ã Ã Ã‘ Ã’ Ã“ Ã” Ã• Ã– Ã˜ Ã™ Ãš Ã› Ãœ Ã Ã ÃŸ Ã  Ã¡ Ã¢ Ã£ Ã¤ Ã¥ Ã¦ Ã§ Ã¨ Ã© Ãª Ã« Ã¬ Ã­ Ã® Ã¯  Ã° Ã± Ã² Ã³ Ã´ Ãµ Ã¶ Ã¸ Ã¹ Ãº Ã» Ã¼ Ã½ Ã¾ Ã¿ ";
 		//aqui temos uma variavel inteira z que indicara a posicao da chave que o bloco ira emfilar
 		//por exemplo se for 0 ele ira pegar a primeira posicao para concautear e etc
 		int z=0;
@@ -165,8 +165,9 @@ public class Crypto {
 					int amount=testerasc - lowerindex;
 					ascii += amount; 
 					//122 e o representante de z na tabela ascii por isso se este passar dessas fazemos com que ela volte ao a e adicione oque a diferenca
+					//temos o -1 porque precisamos de um representante de 0 para adicioanr a diferenca
 					if(ascii > 122) {
-						ascii= (lowerindex) + (ascii -122);
+						ascii= (lowerindex-1) + (ascii -122);
 					}
 					//aqui convertemos o numero em tabela ascii de volta para a char letter
 					letter=(char)ascii;
@@ -179,8 +180,9 @@ public class Crypto {
 					int amount=testerasc - capsindex;
 					ascii += amount; 
 					//e que o 90 representa o Z na tabela ascii, por isso qnd chega nele esta volta ao A e adicione a diferenca
+					//temos o -1 porque precisamos de um representante de 0 para adicioanr a diferenca
 					if(ascii > 90) {
-						ascii= (capsindex) + (ascii - 90);
+						ascii= (capsindex-1) + (ascii - 90);
 					}
 					letter=(char)ascii;
 				}
@@ -207,7 +209,7 @@ public class Crypto {
 		int capsindex=capsbeg;
 		String block="";
 		//aqui colocamos todas as palavras com acento,para que estas possam ser transformadas em suas respectivas palavras sem acentos
-		String specialletter = "À Á Â Ã Ä Å Æ Ç È É Ê Ë Ì Í Î Ï Ğ Ñ Ò Ó Ô Õ Ö Ø Ù Ú Û Ü İ Ş ß à á â ã ä å æ ç è é ê ë ì í î ï  ğ ñ ò ó ô õ ö ø ù ú û ü ı ş ÿ ";
+		String specialletter = "Ã€ Ã Ã‚ Ãƒ Ã„ Ã… Ã† Ã‡ Ãˆ Ã‰ ÃŠ Ã‹ ÃŒ Ã Ã Ã Ã Ã‘ Ã’ Ã“ Ã” Ã• Ã– Ã˜ Ã™ Ãš Ã› Ãœ Ã Ã ÃŸ Ã  Ã¡ Ã¢ Ã£ Ã¤ Ã¥ Ã¦ Ã§ Ã¨ Ã© Ãª Ã« Ã¬ Ã­ Ã® Ã¯  Ã° Ã± Ã² Ã³ Ã´ Ãµ Ã¶ Ã¸ Ã¹ Ãº Ã» Ã¼ Ã½ Ã¾ Ã¿ ";
 		int z=0;
 		if(blocksize <= key.length()) {
 			for(int i=0;i < word.length();i++) { 
@@ -327,8 +329,9 @@ public class Crypto {
 					int amount=testerasc - lowerindex;
 					ascii -= amount; 
 					//122 e o representante de z na tabela ascii por isso se este passar do A este volta para o z e adiciona a diferenca
+					//como 122 representa z, precisamos do indice maior que ele(123) para saber a real diferenca do alfabeto
 					if(ascii < lowerindex) {
-						ascii= 122 - Math.abs(ascii - lowerindex);
+						ascii= 123 - Math.abs(ascii - lowerindex);
 					}
 					//aqui convertemos o numero em tabela ascii de volta para a char letter
 					letter=(char)ascii;
@@ -341,8 +344,9 @@ public class Crypto {
 					int amount=testerasc - capsindex;
 					ascii -= amount; 
 					//e que o 90 representa o Z na tabela ascii, por isso quando se passa do A este volta para o Z e adiciona a diferenca
+					//como 90 e Z precisamos do maior dele(91) para de fato saber a diferenca
 					if(ascii < capsindex) {
-						ascii= 90 - Math.abs(ascii - capsindex);
+						ascii= 91 - Math.abs(ascii - capsindex);
 					}
 					letter=(char)ascii;
 				}
@@ -357,7 +361,7 @@ public class Crypto {
 		System.out.println("a palavra descriptografada e: " + finalWord);
 	} 
 	//aqui temos uma classe estatica que basicamente transforma o acento em sua respectiva letra equivalente
-	// ex: ã =a
+	// ex: Ã£ =a
 	public static String deAccent(String str) {
 		String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD); 
 		Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
