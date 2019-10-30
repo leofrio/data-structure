@@ -195,7 +195,7 @@ public class Crypto {
 			finalWord += letter;
 			index++;
 		} 
-		System.out.println("a palavra criptografada e: " + finalWord);
+		System.out.println("A palavra criptografada é: " + finalWord);
 	} 
 	public void Decrypto(String word,String key,int blocksize) {
 		//neste comeco e completamente igual ao "crypto"
@@ -209,7 +209,7 @@ public class Crypto {
 		int capsindex=capsbeg;
 		String block="";
 		//aqui colocamos todas as palavras com acento,para que estas possam ser transformadas em suas respectivas palavras sem acentos
-		String specialletter = "À Á Â Ã Ä Å Æ Ç È É Ê Ë Ì Í Î Ï Ð Ñ Ò Ó Ô Õ Ö Ø Ù Ú Û Ü Ý Þ ß à á â ã ä å æ ç è é ê ë ì í î ï  ð ñ ò ó ô õ ö ø ù ú û ü ý þ ÿ ";
+		String specialletter = "ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ";
 		int z=0;
 		if(blocksize <= key.length()) {
 			for(int i=0;i < word.length();i++) { 
@@ -358,7 +358,7 @@ public class Crypto {
 			index++; 
 			finalWord += letter;
 		} 
-		System.out.println("a palavra descriptografada e: " + finalWord);
+		System.out.println("A palavra descriptografada é: " + finalWord);
 	} 
 	//aqui temos uma classe estatica que basicamente transforma o acento em sua respectiva letra equivalente
 	// ex: ã =a
