@@ -1,20 +1,23 @@
 
 public class Element {
-	private char letter;
+	private String  block;
 	private Element next;
 	
-	public Element(char letter) {
-		this.letter = letter;
-	}
 	
-	public char getLetter() {
-		return letter;
-	}
 	
-	public void setLetter(char letter) {
-		this.letter = letter;
+	public Element(String block) {
+		super();
+		this.block = block;
 	}
-	
+
+	public String getBlock() {
+		return block;
+	}
+
+	public void setBlock(String block) {
+		this.block = block;
+	}
+
 	public Element getNext() {
 		return next;
 	}
