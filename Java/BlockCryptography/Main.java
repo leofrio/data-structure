@@ -2,67 +2,51 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        int blockindex = 0;
-        String key = ""; // Chave utilizada para criptografar ou descriptografar
-        String word; // Frase a ser criptografada ou descriptografada
-        Scanner let = new Scanner(System.in); // Comando utilizado para receber Strings do usuário
-        Que q = new Que(); // Instância de uma nova fila
-        boolean start = false;
-
-        while(true) {
-            if (!start) {
-                System.out.println("Digite a chave: ");
-                key = let.nextLine();
-                System.out.println("Digite o tamanho do bloco: ");
-                blockindex = let.nextInt();
-                start = true;
-            } else {
-                System.out.println("Selecione uma operação: " +
-                        "\n- 1) Criptografar uma palavra" +
-                        "\n- 2) Descriptografar uma palavra" +
-                        "\n- 3) Alterar chave" +
-                        "\n- 4) Alterar tamanho do bloco" +
-                        "\n- 5) Finalizar programa");
-
-                int choice = let.nextInt();
-                if (choice == 1) {
-                    q.empty();
-                    let.nextLine();
-                    System.out.println("Digite a frase que será criptografada: ");
-                    word = let.nextLine();
-                    q.addCrypt(word, key, blockindex);
-                    q.show();
-                }
-
-                if (choice == 2) {
-                    q.empty();
-                    let.nextLine();
-                    System.out.println("Digite a frase que será descriptografada: ");
-                    word = let.nextLine();
-                    q.addDecrypt(word, key, blockindex);
-                    q.show();
-                }
-
-                if (choice == 3) {
-                    let.nextLine();
-                    System.out.println("Digite a nova chave: ");
-                    key = let.nextLine();
-                }
-
-                if (choice == 4) {
-                    System.out.println("Digite o novo tamanho do bloco: ");
-                    blockindex = let.nextInt();
-                }
-
-                if (choice == 5) {
-                    System.out.println("Finalizando programa...");
-                    return;
-                }
-
-                if(choice < 1 || choice > 5) {
-                    System.out.println("Operação inválida!");
-                }
-            }
-        }
+    	Crypto c=new Crypto();
+    	Scanner let=new Scanner(System.in); 
+    	String key="";
+    	String word="";
+    	int blocksize=-4343344;
+    	System.out.println("esse e um programa que ira criptografar baseado me chaes de palavras digitadas pelo o usuario");
+    	for(int i=0;true;i++) { 
+    		if(i ==0) {
+    			System.out.println("por favor digite a chave"); 
+    			key=let.nextLine(); 
+    			System.out.println("por favor digite o tamanho do bloco");
+    			blocksize=let.nextInt();
+    		}
+    		System.out.println("escolha uma das opcoes abaixo"); 
+    		System.out.println("1-criptografar uma palavra");
+    		System.out.println("2-descriptografar uma palavra");
+    		System.out.println("3-alterar a chave");
+    		System.out.println("4-alterar o tamanho do bloco");
+    		System.out.println("5-sair");
+    		int choice=let.nextInt();
+    		if(choice == 1) {
+    			let.nextLine();
+    			System.out.println("digite a palavra a ser criptografada");
+    			word=let.nextLine(); 
+    			c.crypto(word, key, blocksize);
+    		} 
+    		if(choice == 2) {
+    			let.nextLine();
+    			System.out.println("digite a palavra a ser decriptografada");
+    			word=let.nextLine(); 
+    			c.Decrypto(word, key, blocksize);
+    		} 
+    		if(choice == 3) {
+    			let.nextLine();
+    			System.out.println("digite a nova chave");
+    			key=let.nextLine();
+    		} 
+    		if(choice == 4) {
+    			System.out.println("digite o novo tamanho do bloco");
+    			blocksize=let.nextInt();
+    		}
+    		if(choice == 5) {
+    			break;
+    		}
+    	}
+    	System.out.println("the end");
     }
 }
